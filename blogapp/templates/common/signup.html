@@ -1,0 +1,110 @@
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MBTI world</title>
+<style>
+   * {
+      margin:0;
+   }
+
+    /* Header */
+    header {
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:10px;
+            height:30px;
+            background-color:rgb(174, 211, 150);
+      }
+      .left-header {
+            flex:1;
+      }
+      .main-header {
+            flex:1;
+            align-items:center;
+            justify-content:center;
+            display:inline-block;
+            text-align:center;
+            color:black;
+      }
+      a, a:link, a:visited {
+            text-decoration:none;
+            color:black;
+      }
+      .right-header {
+            flex:1;
+      }
+   /* End of Header */
+      
+   /* Wrapper */
+        div.wrapper {
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:150px;
+        }
+
+      /* Info */
+         div.join {
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            width:700px; height:400px;
+            background-color:lightgray;
+            text-align:center;
+            border-radius:50px;
+         }
+         a, a:link, a:visited {
+         text-decoration:none;
+         color:black;
+         }
+      /* End of Info */
+   /* End of Wrapper */
+</style>
+</head>
+<body>   
+<!-- Header -->
+<header>
+    <div class="left-header"></div>
+    <div class="main-header"><a href="{% url 'home' %}">MBTI world</a></div>
+    <div class="right-header"></div>
+ </header>
+ <!-- End of Header -->
+   <div class="wrapper">
+      <div class="join">
+         <h1>welcome to MBTI world</h1>
+         <br>
+         <form method="post" action="{% url 'common:signup' %}">
+            {% csrf_token %}
+            {% include "form_errors.html" %}
+            <div class="mb-3">
+                <label for="username">사용자 이름</label>
+                <input type="text" class="form-control" name="username" id="username"
+                       value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="password1">비밀번호</label>
+                <input type="password" class="form-control" name="password1" id="password1"
+                       value="{{ form.password1.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="password2">비밀번호 확인</label>
+                <input type="password" class="form-control" name="password2" id="password2"
+                       value="{{ form.password2.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="email">이메일</label>
+                <input type="text" class="form-control" name="email" id="email"
+                       value="{{ form.email.value|default_if_none:'' }}">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">가입하기</button>
+        </form>
+      </div>
+   </div>
+</body>
+</html>
+{% endblock %}
